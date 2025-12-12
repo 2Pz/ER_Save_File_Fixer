@@ -1,7 +1,6 @@
 """
 Elden Ring - Torrent State Fixer (GUI Version)
 Fixes the loading screen freeze caused by Torrent being Active with 0 HP
-Now with proper checksum recalculation to prevent "Save data is corrupted" error
 """
 
 import tkinter as tk
