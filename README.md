@@ -1,43 +1,53 @@
-# Elden Ring Torrent State Fixer
+# Elden Ring Save File Fixer
 
-Fixes the infinite loading screen bug caused by Torrent being stuck in an active state with 0 HP.
+Fixes infinite loading screen issues caused by Torrent bugs and DLC location problems.
 
-## What's the problem?
+## What does this fix?
 
-When you die on Torrent and instantly crash/alt + f4 the state of Torrent might not get updated but will still be set to Active. This causes an infinite loading screen.
+**Torrent Stuck Loading Bug**
+When you die on Torrent and crash/alt+F4, Torrent can get stuck in an "Active" state with 0 HP, causing infinite loading screens.
 
-## What does this do?
-
-Scans your save file and fixes Torrent's state so the game can load normally. Creates a backup automatically.
+**DLC Location Bug**
+If you're stuck in a DLC location without the DLC, the game won't load. This teleports you back to Limgrave.
 
 ## Download
 
-[Get the latest exe here](../../releases/latest)
+[Get the latest release here](../../releases/latest)
 
-## Usage
+## How to Use
 
-1. Close Elden Ring
-2. Run the exe
-3. Click "Auto-Find" or browse to your save manually
-4. Click "Fix Torrent State"
+1. Close Elden Ring completely
+2. Run the application
+3. Click "Auto-Find" or "Browse" to select your save file
+4. Click "Load Characters"
+5. Select the stuck character from the list
+6. Click "Fix Selected Character"
 
-Works with standard saves (.sl2) and Seamless Co-op saves (.co2).
+The tool will create an automatic backup, detect any issues, and apply the necessary fixes.
 
-## Running from source
+## Compatibility
 
+- Standard saves (.sl2)
+- Seamless Co-op saves (.co2)
+- All 10 character slots
+
+## Running from Source
+
+Requires Python 3.7+ with tkinter:
 ```bash
-python elden_ring_torrent_fixer.py
+python elden_ring_save_fixer_gui.py
 ```
-
-Requires Python 3.6+ with tkinter.
 
 ## Building
-
 ```bash
 pip install pyinstaller
-pyinstaller elden_ring_torrent_fixer.spec
+pyinstaller --onefile --windowed --name "Elden Ring Save Fixer" elden_ring_save_fixer_gui.py
 ```
 
-## Note
+## Safety
 
-Backups are created automatically but use at your own risk.
+Automatic backups are created before any changes. Use the "Restore Backup" button if something goes wrong.
+
+## Credits
+
+Save file parsing based on [ClayAmore's Elden Ring Save Templates](https://github.com/ClayAmore/EldenRingSaveTemplate)

@@ -2,10 +2,10 @@
 
 
 a = Analysis(
-    ['elden_ring_torrent_fixer.py'],
+    ['elden_ring_save_fixer_gui.py'],
     pathex=[],
     binaries=[],
-    datas=[],
+    datas=[('elden_ring_save_parser.py', '.')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
@@ -22,7 +22,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name='elden_ring_torrent_fixer',
+    name='Elden Ring Save Fixer',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
