@@ -10,6 +10,9 @@ When you die on Torrent and crash/alt+F4, Torrent can get stuck in an "Active" s
 **DLC Location Bug**
 If you're stuck in a DLC location without the DLC, the game won't load. This teleports you back to Limgrave.
 
+**General Loading Screen Bug**
+Teleports you back to Limgrave to possibly fix other infinite loading screens.
+
 ## Download
 
 [Get the latest release here](../../releases/latest)
