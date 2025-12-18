@@ -1,17 +1,20 @@
 # Elden Ring Save File Fixer
 
-Fixes infinite loading screen issues caused by Torrent bugs and DLC location problems.
+Fixes infinite loading screens and corrupted save files in Elden Ring.
 
 ## What does this fix?
 
 **Torrent Stuck Loading Bug**
-When you die on Torrent and crash/alt+F4, Torrent can get stuck in an "Active" state with 0 HP, causing infinite loading screens.
+When you die on Torrent and crash or alt+F4, Torrent can get stuck in an "Active" state with 0 HP, causing infinite loading screens.
+
+**Save File Corruption**
+Fixes corrupted world state data.
 
 **DLC Location Bug**
-If you're stuck in a DLC location without the DLC, the game won't load. This teleports you back to Limgrave.
+If you are stuck in a DLC location without owning the DLC, the game will not load. This tool teleports you back to Limgrave.
 
-**General Loading Screen Bug**
-Teleports you back to Limgrave to possibly fix other infinite loading screens.
+**General Loading Issues**
+Can teleport you back to Limgrave as a fallback fix for other infinite loading screen problems.
 
 ## Download
 
@@ -23,25 +26,21 @@ Teleports you back to Limgrave to possibly fix other infinite loading screens.
 2. Run the application
 3. Click "Auto-Find" or "Browse" to select your save file
 4. Click "Load Characters"
-5. Select the stuck character from the list
+5. Select the affected character from the list
 6. Click "Fix Selected Character"
 
-The tool will create an automatic backup, detect any issues, and apply the necessary fixes.
-
-## Compatibility
-
-- Standard saves (.sl2)
-- Seamless Co-op saves (.co2)
-- All 10 character slots
+The tool automatically creates a backup before making changes. Use "Restore Backup" if needed.
 
 ## Running from Source
 
 Requires Python 3.7+ with tkinter:
+
 ```bash
 python elden_ring_save_fixer_gui.py
 ```
 
 ## Building
+
 ```bash
 pip install pyinstaller
 pyinstaller --onefile --windowed --name "Elden Ring Save Fixer" elden_ring_save_fixer_gui.py
@@ -49,7 +48,7 @@ pyinstaller --onefile --windowed --name "Elden Ring Save Fixer" elden_ring_save_
 
 ## Safety
 
-Automatic backups are created before any changes. Use the "Restore Backup" button if something goes wrong.
+All changes are made to a copy of your save file. The original is backed up with a timestamp. You can restore any backup using the "Restore Backup" button.
 
 ## Credits
 
