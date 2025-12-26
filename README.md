@@ -1,5 +1,4 @@
 # Elden Ring Save File Fixer
-
 Fixes infinite loading screens and corrupted save files in Elden Ring.
 
 ## What does this fix?
@@ -17,11 +16,9 @@ If you are stuck in a DLC location without owning the DLC, the game will not loa
 Can teleport you back to Limgrave as a fallback fix for other infinite loading screen problems.
 
 ## Download
-
 [Get the latest release here](../../releases/latest)
 
 ## How to Use
-
 1. Close Elden Ring completely
 2. Run the application
 3. Click "Auto-Find" or "Browse" to select your save file
@@ -32,24 +29,31 @@ Can teleport you back to Limgrave as a fallback fix for other infinite loading s
 The tool automatically creates a backup before making changes. Use "Restore Backup" if needed.
 
 ## Running from Source
-
 Requires Python 3.7+ with tkinter:
-
 ```bash
 python elden_ring_save_fixer_gui.py
 ```
 
 ## Building
-
 ```bash
 pip install pyinstaller
 pyinstaller --onefile --windowed --name "Elden Ring Save Fixer" elden_ring_save_fixer_gui.py
 ```
 
 ## Safety
-
 All changes are made to a copy of your save file. The original is backed up with a timestamp. You can restore any backup using the "Restore Backup" button.
 
-## Credits
+## Contributing
+Contributions are welcome. Feel free to:
+- Report bugs or issues
+- Suggest new features
+- Submit pull requests
+- Improve documentation
 
+Please open an issue first.
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Credits
 Save file parsing based on [ClayAmore's Elden Ring Save Templates](https://github.com/ClayAmore/EldenRingSaveTemplate)

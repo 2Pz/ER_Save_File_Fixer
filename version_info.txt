@@ -18,6 +18,7 @@ VSVersionInfo(
         [StringStruct(u'FileDescription', u'Elden Ring Save File Fixer'),
         StringStruct(u'FileVersion', u'3.2.0.0'),
         StringStruct(u'InternalName', u'elden_ring_save_fixer'),
+        StringStruct(u'LegalCopyright', u'MIT License - Copyright (c) 2025'),
         StringStruct(u'OriginalFilename', u'Elden Ring Save Fixer.exe'),
         StringStruct(u'ProductName', u'Elden Ring Save File Fixer'),
         StringStruct(u'ProductVersion', u'3.2.0.0')])
