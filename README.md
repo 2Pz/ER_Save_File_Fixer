@@ -28,16 +28,8 @@ Can teleport you back to Limgrave as a fallback fix for other infinite loading s
 
 The tool automatically creates a backup before making changes. Use "Restore Backup" if needed.
 
-## Running from Source
-Requires Python 3.7+ with tkinter:
-```bash
-python elden_ring_save_fixer_gui.py
-```
-
-## Building
-```bash
-pyinstaller "Elden Ring Save Fixer.spec"
-```
+## Development & Building
+See [`DEVELOPMENT.md`](DEVELOPMENT.md).
 
 ## Safety
 All changes are made to a copy of your save file. The original is backed up with a timestamp. You can restore any backup using the "Restore Backup" button.
