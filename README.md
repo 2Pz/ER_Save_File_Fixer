@@ -28,10 +28,7 @@ Can teleport you back to Limgrave as a fallback fix for other infinite loading s
 
 The tool automatically creates a backup before making changes. Use "Restore Backup" if needed.
 
-## Running from Source
-See [`DEVELOPMENT.md`](DEVELOPMENT.md).
-
-## Building
+## Development & Building
 See [`DEVELOPMENT.md`](DEVELOPMENT.md).
 
 ## Safety
