@@ -19,8 +19,8 @@ def _ensure_src_on_path() -> None:
 _ensure_src_on_path()
 
 from er_save_fixer.parser import (  # noqa: E402
-    CSPlayerCoords,
     CharacterSlot,
+    CSPlayerCoords,
     EldenRingSaveFile,
     FloatVector3,
     FloatVector4,

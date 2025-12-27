@@ -124,15 +124,27 @@ def build_parser() -> argparse.ArgumentParser:
 
     p_fix = sub.add_parser("fix", help="Fix a character slot (headless)")
     p_fix.add_argument("--save", required=True, help="Path to ER*.sl2/ER*.co2 save")
-    p_fix.add_argument("--slot", required=True, type=_parse_slot, help="Character slot (1-10)")
+    p_fix.add_argument(
+        "--slot", required=True, type=_parse_slot, help="Character slot (1-10)"
+    )
     p_fix.add_argument(
         "--teleport",
         choices=["limgrave", "roundtable"],
         help="Force teleport destination",
     )
     backup_group = p_fix.add_mutually_exclusive_group()
-    backup_group.add_argument("--backup", action="store_true", default=True, help="Create .backup copy (default)")
-    backup_group.add_argument("--no-backup", dest="backup", action="store_false", help="Do not create .backup copy")
+    backup_group.add_argument(
+        "--backup",
+        action="store_true",
+        default=True,
+        help="Create .backup copy (default)",
+    )
+    backup_group.add_argument(
+        "--no-backup",
+        dest="backup",
+        action="store_false",
+        help="Do not create .backup copy",
+    )
     p_fix.set_defaults(_handler=cmd_fix)
 
     return p
@@ -166,5 +178,3 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
-

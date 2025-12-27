@@ -8,7 +8,6 @@ from __future__ import annotations
 import struct
 from dataclasses import dataclass
 from enum import IntEnum
-from typing import List, Optional, Tuple
 
 
 class HorseState(IntEnum):
@@ -253,8 +252,8 @@ class CharacterSlot:
         self.checksum_offset = self.slot_offset
         self.data_start = self.slot_offset + self.CHECKSUM_SIZE
 
-        self.version: Optional[int] = None
-        self.map_id: Optional[MapID] = None
+        self.version: int | None = None
+        self.map_id: MapID | None = None
         self.gaitem_count: int = 0
         self.gaitem_map_end: int = 0
         self.player_data_offset: int = 0
@@ -605,7 +604,7 @@ class CharacterSlot:
 
         return 0
 
-    def get_character_name(self) -> Optional[str]:
+    def get_character_name(self) -> str | None:
         """Get character name from PlayerGameData at offset +0x94"""
         try:
             name_offset = self.player_data_offset + 0x94
@@ -629,7 +628,7 @@ class CharacterSlot:
 
         return None
 
-    def get_slot_map_id(self) -> Optional[MapID]:
+    def get_slot_map_id(self) -> MapID | None:
         """Get the M MapID from the slot header"""
         try:
             map_id_offset = self.data_start + 0x4
@@ -637,7 +636,7 @@ class CharacterSlot:
         except Exception:
             return None
 
-    def get_horse_data(self) -> Optional[RideGameData]:
+    def get_horse_data(self) -> RideGameData | None:
         """Get parsed RideGameData"""
         self._ensure_horse_data()
         if self.horse_offset > 0:
@@ -657,7 +656,7 @@ class CharacterSlot:
                 horse_bytes
             )
 
-    def get_player_coords(self) -> Optional[CSPlayerCoords]:
+    def get_player_coords(self) -> CSPlayerCoords | None:
         """Get parsed CSPlayerCoords"""
         self._ensure_player_coords()
         if self.player_coords_offset > 0:
@@ -677,7 +676,7 @@ class CharacterSlot:
                 + len(coords_bytes)
             ] = coords_bytes
 
-    def get_world_area_time(self) -> Optional[WorldAreaTime]:
+    def get_world_area_time(self) -> WorldAreaTime | None:
         """Get WorldAreaTime structure"""
         self._ensure_corruption_structures()
         if self.WORLD_AREA_TIME_OFFSET == 0:
@@ -697,7 +696,7 @@ class CharacterSlot:
         time_bytes = time.to_bytes()
         self.data[offset : offset + len(time_bytes)] = time_bytes
 
-    def get_world_area_weather(self) -> Optional[WorldAreaWeather]:
+    def get_world_area_weather(self) -> WorldAreaWeather | None:
         """Get WorldAreaWeather structure"""
         self._ensure_corruption_structures()
         if self.WORLD_AREA_WEATHER_OFFSET == 0:
@@ -717,7 +716,7 @@ class CharacterSlot:
         weather_bytes = weather.to_bytes()
         self.data[offset : offset + len(weather_bytes)] = weather_bytes
 
-    def get_steam_id(self) -> Optional[int]:
+    def get_steam_id(self) -> int | None:
         """Get SteamId from character slot"""
         self._ensure_corruption_structures()
         if self.STEAM_ID_OFFSET == 0:
@@ -736,7 +735,7 @@ class CharacterSlot:
         offset = self.data_start + self.STEAM_ID_OFFSET
         struct.pack_into("<Q", self.data, offset, steam_id)
 
-    def has_corruption(self) -> Tuple[bool, List[str]]:
+    def has_corruption(self) -> tuple[bool, list[str]]:
         """Check if character has known corruption patterns"""
         self._ensure_corruption_structures()
 
@@ -785,7 +784,7 @@ class EldenRingSaveFile:
         with open(filepath, "rb") as f:
             self.data = bytearray(f.read())
 
-        self.characters: List[Optional[CharacterSlot]] = []
+        self.characters: list[CharacterSlot | None] = []
         for i in range(self.MAX_CHARACTER_COUNT):
             try:
                 slot_offset = self.HEADER_SIZE + (
@@ -810,7 +809,7 @@ class EldenRingSaveFile:
             return self.data[self.ACTIVE_SLOTS_OFFSET + slot_index] == 1
         return False
 
-    def get_active_slots(self) -> List[int]:
+    def get_active_slots(self) -> list[int]:
         """Get list of active slot indices (slots with valid characters)"""
         active = []
         for i in range(self.MAX_CHARACTER_COUNT):
@@ -842,7 +841,7 @@ class EldenRingSaveFile:
         md5_hash = hashlib.md5(userdata).digest()
         self.data[offset : offset + self.CHECKSUM_SIZE] = md5_hash
 
-    def save(self, filepath: Optional[str] = None):
+    def save(self, filepath: str | None = None):
         """Save to disk"""
         if filepath is None:
             filepath = self.filepath
@@ -854,7 +853,7 @@ class EldenRingSaveFile:
 
             os.fsync(f.fileno())
 
-    def get_userdata_steam_id(self) -> Optional[int]:
+    def get_userdata_steam_id(self) -> int | None:
         """Get SteamId from USER_DATA_10 (Common data)"""
         try:
             offset = self.USERDATA_10_START + self.STEAM_ID_OFFSET_USERDATA
@@ -862,7 +861,7 @@ class EldenRingSaveFile:
         except Exception:
             return None
 
-    def get_seconds_played(self, slot_index: int) -> Optional[int]:
+    def get_seconds_played(self, slot_index: int) -> int | None:
         """Get SecondsPlayed for a specific character from ProfileSummary"""
         try:
             profile_summary_start = self.USERDATA_10_START + self.PROFILE_SUMMARY_OFFSET
@@ -879,7 +878,7 @@ class EldenRingSaveFile:
         except Exception:
             return None
 
-    def fix_character_corruption(self, slot_index: int) -> Tuple[bool, List[str]]:
+    def fix_character_corruption(self, slot_index: int) -> tuple[bool, list[str]]:
         """Fix known corruption patterns for a character slot"""
         if not (0 <= slot_index < self.MAX_CHARACTER_COUNT):
             return (False, ["Invalid slot index"])

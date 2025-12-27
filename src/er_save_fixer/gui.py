@@ -12,7 +12,7 @@ import tkinter as tk
 from pathlib import Path
 from tkinter import filedialog, messagebox, ttk
 
-from er_save_fixer.parser import EldenRingSaveFile, HorseState, MapID
+from er_save_fixer.parser import EldenRingSaveFile, MapID
 
 
 class SaveFileFixer:
@@ -57,7 +57,9 @@ class SaveFileFixer:
         ).pack()
 
         # File Selection
-        file_frame = ttk.LabelFrame(self.root, text="Step 1: Select Save File", padding="15")
+        file_frame = ttk.LabelFrame(
+            self.root, text="Step 1: Select Save File", padding="15"
+        )
         file_frame.pack(fill=tk.X, padx=15, pady=10)
 
         self.file_path_var = tk.StringVar()
@@ -103,7 +105,9 @@ class SaveFileFixer:
         ).pack(side=tk.RIGHT)
 
         # Character Selection
-        char_frame = ttk.LabelFrame(self.root, text="Step 2: Select Character to Fix", padding="10")
+        char_frame = ttk.LabelFrame(
+            self.root, text="Step 2: Select Character to Fix", padding="10"
+        )
         char_frame.pack(fill=tk.X, padx=15, pady=8)
 
         # Character list
@@ -176,7 +180,8 @@ class SaveFileFixer:
     def auto_detect(self):
         if not self.default_save_path.exists():
             messagebox.showerror(
-                "Not Found", f"Elden Ring save folder not found:\n{self.default_save_path}"
+                "Not Found",
+                f"Elden Ring save folder not found:\n{self.default_save_path}",
             )
             return
 
@@ -219,7 +224,9 @@ class SaveFileFixer:
         scrollbar = ttk.Scrollbar(listbox_frame)
         scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 
-        listbox = tk.Listbox(listbox_frame, yscrollcommand=scrollbar.set, font=("Consolas", 9))
+        listbox = tk.Listbox(
+            listbox_frame, yscrollcommand=scrollbar.set, font=("Consolas", 9)
+        )
         listbox.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
         scrollbar.config(command=listbox.yview)
 
@@ -265,7 +272,9 @@ class SaveFileFixer:
             active_slots = self.save_file.get_active_slots()
 
             if not active_slots:
-                messagebox.showinfo("No Characters", "No active characters found in this save file.")
+                messagebox.showinfo(
+                    "No Characters", "No active characters found in this save file."
+                )
                 self.status_var.set("No characters found")
                 return
 
@@ -370,9 +379,7 @@ class SaveFileFixer:
         horse = slot.get_horse_data()
         if horse:
             info += f"\nTorrent HP: {horse.hp}\n"
-            info += (
-                f"Torrent State: {horse.state.name if horse.state.value != 0 else 'DEAD'}\n"
-            )
+            info += f"Torrent State: {horse.state.name if horse.state.value != 0 else 'DEAD'}\n"
 
             if horse.has_bug():
                 issues_detected.append("Torrent stuck loading bug")
@@ -626,7 +633,9 @@ class SaveFileFixer:
         # Only show teleport dialog if:
         # 1. No issues at all (user wants preventive teleport)
         # 2. DLC location issue (requires teleport)
-        needs_teleport_selection = (not has_torrent_bug and not has_corruption) or has_dlc_location
+        needs_teleport_selection = (
+            not has_torrent_bug and not has_corruption
+        ) or has_dlc_location
 
         teleport_location = None
 
@@ -667,7 +676,9 @@ class SaveFileFixer:
             if self.detail_popup:
                 self.detail_popup.attributes("-topmost", False)
 
-            result = messagebox.askyesno("Confirm Fix", confirm_msg, parent=self.detail_popup)
+            result = messagebox.askyesno(
+                "Confirm Fix", confirm_msg, parent=self.detail_popup
+            )
 
             # Restore topmost
             if self.detail_popup:
@@ -701,7 +712,9 @@ class SaveFileFixer:
             if has_corruption:
                 self.status_var.set("Fixing corruption...")
                 self.root.update()
-                was_fixed, corruption_fixes = self.save_file.fix_character_corruption(slot_idx)
+                was_fixed, corruption_fixes = self.save_file.fix_character_corruption(
+                    slot_idx
+                )
                 if was_fixed:
                     for fix in corruption_fixes:
                         fixed_issues.append(f"Corruption: {fix}")
@@ -816,5 +829,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
